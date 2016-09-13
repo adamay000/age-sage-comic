@@ -8,7 +8,7 @@ export default class SceneStore {
     return 'SceneStore.SCENE_COMIC';
   }
   static get SCENE_ENDING() {
-    return 'SceneStore.SCENE_COMIC';
+    return 'SceneStore.SCENE_ENDING';
   }
 
   static get EVENT_UPDATE() {

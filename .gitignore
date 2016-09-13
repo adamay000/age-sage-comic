@@ -92,3 +92,5 @@ node_modules
 
 .idea
 dist
+
+src/statics/comic

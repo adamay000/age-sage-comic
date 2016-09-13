@@ -1,20 +1,23 @@
 <app>
   <scene />
-  <p>{this.title}</p>
 
   <script>
     import SceneAction from '../actions/SceneAction';
+    import ComicAction from '../actions/ComicAction';
 
     this.on('mount', () => {
       setTimeout(() => {
-        SceneAction.gotoHome();
+        SceneAction.gotoComic();
+        ComicAction.reset();
       }, 0);
     });
-
-    this.title = 0;
-    setInterval(() => {
-      this.title++;
-      this.update();
-    }, 1000);
   </script>
+
+  <style>
+    body {
+      background: #ffdd4c;
+      margin: 0;
+      color: black;
+    }
+  </style>
 </app>

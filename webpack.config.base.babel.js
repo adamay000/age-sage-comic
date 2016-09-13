@@ -37,11 +37,13 @@ export default {
       {
         test: /\.css$/,
         loader: 'style!css!postcss',
-        exclude: /node_modules/,
-        include: [
-          'riot-animate'
-        ]
-      }
+        exclude: /node_modules/
+      },
+      {
+        test: /\.json$/,
+        loader: 'json-loader',
+        exclude: /node_modules/
+      },
     ]
   },
   postcss: () => ({
