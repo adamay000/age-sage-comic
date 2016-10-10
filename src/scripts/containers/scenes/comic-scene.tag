@@ -24,6 +24,7 @@
     import SceneAction from '../../actions/SceneAction';
     import ComicAction from '../../actions/ComicAction';
     import ComicStore from '../../stores/ComicStore';
+    import Comic from '../../controllers/comic/Comic';
     import ComicScroller from '../../functions/ComicScroller';
     import DeviceMotionHandler from '../../functions/DeviceMotionHandler';
     import BackgroundMusic from '../../functions/BackgroundMusic';
@@ -173,6 +174,8 @@
         this.update();
         return;
       }
+
+      Comic.preloadNextPages(this.pages[this.pages.length - 1]);
 
       const lastPageId = scroller.getLastPageId();
       lastPageId && scroller.setTo(lastPageId);
