@@ -60,6 +60,8 @@
       background: url(assets/images/comic-bg-neutral.png) 0 0 repeat;
       padding: 7.81vw;
       box-sizing: border-box;
+      position: relative;
+      overflow-x: hidden;
     }
 
     .contents {
