@@ -55,6 +55,7 @@
     "webpack-notifier": "^1.4.1"
   },
   "dependencies": {
+    "howler": "^2.0.0",
     "riot": "^2.6.1"
   }
 }

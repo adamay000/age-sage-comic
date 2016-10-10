@@ -93,4 +93,5 @@ node_modules
 .idea
 dist
 
-src/statics/comic
+src/statics/comic/*.png
+src/statics/music/*.mp3

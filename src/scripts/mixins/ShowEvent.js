@@ -1,20 +1,18 @@
 export default {
   init() {
+    let isMounted = false;
+    let isShow = false;
     this.on('mount', () => {
-      this._isShow = this.opts.isShow;
+      isShow = this.opts.if;
+      isMounted = true;
+      this.trigger(isShow ? 'onShow' : 'onHide');
     });
     this.on('update', () => {
-      if (this._isShow === this.opts.isShow) {
+      if (!isMounted || isShow === this.opts.if) {
         return;
       }
-      this.trigger(this.opts.isShow ? 'onShowBefore' : 'onHideBefore');
-    });
-    this.on('updated', () => {
-      if (this._isShow === this.opts.isShow) {
-        return;
-      }
-      this.trigger(this.opts.isShow ? 'onShowAfter' : 'onHideAfter');
-      this._isShow = this.opts.isShow;
+      isShow = this.opts.if;
+      this.trigger(isShow ? 'onShow' : 'onHide');
     });
   }
 };

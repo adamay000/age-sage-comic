@@ -11,6 +11,10 @@ export default class ComicScroller {
     return 'Comicscroller.RIGHT';
   }
 
+  static get EVENT_SCROLL() {
+    return 'ComicScroller.EVENT_SCROLL';
+  }
+
   constructor($wrapper, width) {
     this.$wrapper = $wrapper;
     this._width = width;
@@ -25,6 +29,7 @@ export default class ComicScroller {
     this._isDragging = false;
     this._startPoint = null;
     this._lastPoint = null;
+    this._lastMoveX = 0;
 
     this._onTouchStart = this._onTouchStart.bind(this);
     this._onTouchMove = this._onTouchMove.bind(this);
@@ -35,6 +40,8 @@ export default class ComicScroller {
     comicStore.on(ComicStore.EVENT_UPDATE, () => {
       this._pages = comicStore.getPages();
     });
+
+    riot.observable(this);
   }
 
   enable() {
@@ -46,6 +53,7 @@ export default class ComicScroller {
     this._isDragging = false;
     this._startPoint = null;
     this._lastPoint = null;
+    this._lastMoveX = 0;
 
     this.$wrapper.addEventListener('touchstart', this._onTouchStart, false);
     this.$wrapper.addEventListener('touchmove', this._onTouchMove, false);
@@ -61,6 +69,7 @@ export default class ComicScroller {
     this._isDragging = false;
     this._startPoint = null;
     this._lastPoint = null;
+    this._lastMoveX = 0;
 
     this.$wrapper.removeEventListener('touchstart', this._onTouchStart);
     this.$wrapper.removeEventListener('touchmove', this._onTouchMove);
@@ -86,7 +95,54 @@ export default class ComicScroller {
     currentIndex < 0 && (currentIndex = 0);
     currentIndex >= this._pages.length && (currentIndex = this._pages.length - 1);
 
-    return this._pages[currentIndex].pageId;
+    return this._pages[currentIndex] ? this._pages[currentIndex].pageId : null;
+  }
+
+  getSidePages() {
+    const result = {
+      baseRatio: 1,
+      base: null,
+      change: null
+    };
+
+    if (!this._pages.length) {
+      return result;
+    }
+
+    let currentIndex = this._pages.length - Math.round(this._scrollX / window.innerWidth) - 1;
+    currentIndex < 0 && (currentIndex = 0);
+    currentIndex >= this._pages.length && (currentIndex = this._pages.length - 1);
+
+    if (Math.abs(this._scrollX % window.innerWidth) < 0.001) {
+      result.base = this._pages[currentIndex].pageType;
+      return result;
+    }
+
+    let leftPageIndex = this._pages.length - Math.floor(this._scrollX / window.innerWidth) - 1;
+    leftPageIndex < 0 && (leftPageIndex = 0);
+    leftPageIndex >= this._pages.length && (leftPageIndex = this._pages.length - 1);
+    let rightPageIndex = this._pages.length - Math.ceil(this._scrollX / window.innerWidth) - 1;
+    rightPageIndex < 0 && (rightPageIndex = 0);
+    rightPageIndex >= this._pages.length && (rightPageIndex = this._pages.length - 1);
+
+    if (leftPageIndex === rightPageIndex) {
+      result.base = this._pages[leftPageIndex].pageType;
+      return result;
+    }
+
+    const leftDiff = (this._scrollX / window.innerWidth) - (this._scrollX / window.innerWidth | 0);
+
+    if (leftDiff < 0.5) {
+      result.base = this._pages[leftPageIndex].pageType;
+      result.change = this._pages[rightPageIndex].pageType;
+      result.baseRatio = 1 - leftDiff;
+      return result;
+    }
+
+    result.base = this._pages[rightPageIndex].pageType;
+    result.change = this._pages[leftPageIndex].pageType;
+    result.baseRatio = leftDiff;
+    return result;
   }
 
   resetScroll() {
@@ -102,11 +158,16 @@ export default class ComicScroller {
     const endScrollX = this._getXByPageId(pageId);
     const diffScrollX = (endScrollX - startScrollX);
 
+    if (diffScrollX === 0) {
+      this._isScrolling = false;
+      return;
+    }
+
     const isAfterBounce = startScrollX < 0 || startScrollX > (this._pages.length - 1) * window.innerWidth;
 
     this._animation = new Animate({
       duration: isAfterBounce ? 240 : 600 * Math.sqrt(Math.abs(diffScrollX) / window.innerWidth),
-      easing: Animate.Easing.easeInOut(3),
+      easing: Animate.Easing.easeOut(3),
       onProgress: progress => {
         this._scroll(startScrollX + (diffScrollX * progress));
         this._lastPageId = pageId;
@@ -138,6 +199,8 @@ export default class ComicScroller {
 
     this.$wrapper.style.transform = `translate(${-scrollX}px, 0) translate3d(0, 0, 0)`;
     this.$wrapper.style['-webkit-transform'] = `translate(${-scrollX}px, 0) translate3d(0, 0, 0)`;
+
+    this.trigger(ComicScroller.EVENT_SCROLL);
   }
 
   _getXByPageId(pageId) {
@@ -174,6 +237,7 @@ export default class ComicScroller {
 
     const movedX = point.x - this._lastPoint.x;
     this._scroll(this._scrollX - movedX);
+    this._lastMoveX = movedX;
 
     this._lastPoint = point;
   }
@@ -193,9 +257,16 @@ export default class ComicScroller {
       return;
     }
 
+    if (this._lastMoveX > 4) {
+      this.moveTo(this.getNearPageId(ComicScroller.LEFT));
+    } else if (this._lastMoveX < -4) {
+      this.moveTo(this.getNearPageId(ComicScroller.RIGHT));
+    } else {
+      this.moveTo(this.getNearPageId());
+    }
+
     this._isTouching = false;
     this._isDragging = false;
-    this.moveTo(this.getNearPageId());
   }
 
 }

@@ -10,4 +10,8 @@ export default class SceneAction {
     new SceneStore().changeScene(SceneStore.SCENE_COMIC);
   }
 
+  static gotoEnd() {
+    new SceneStore().changeScene(SceneStore.SCENE_END);
+  }
+
 }
