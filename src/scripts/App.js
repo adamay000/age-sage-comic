@@ -1,4 +1,5 @@
 import './containers/app.tag';
+import './containers/pc.tag';
 import './containers/orientation.tag';
 import './containers/scene.tag';
 import './containers/scenes/home-scene.tag';
