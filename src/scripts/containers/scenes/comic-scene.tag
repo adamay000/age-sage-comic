@@ -17,7 +17,7 @@
   <div if="{this.pages.length && this.pages[this.pages.length - 1].nextPages.end != null}" onClick="{this.tryEnd}"
        class="button-end">おしまい</div>
   <div
-    if="{this.pages.length && (this.pages[this.pages.length - 1].nextPages.age != null || this.pages[this.pages.length - 1].nextPages.sage != null)}" class="shake-symbol"></div>
+    if="{this.pages.length && (this.pages[this.pages.length - 1].nextPages.age != null || this.pages[this.pages.length - 1].nextPages.sage != null)}" class="shake-symbol" id="shake-symbol"></div>
 
   <script>
     import ShowEvent from '../../mixins/ShowEvent';
@@ -63,10 +63,12 @@
     function enable() {
       isEnabled = true;
       scroller.enable();
+      shakeRequest();
     }
     function disable() {
       isEnabled = false;
       scroller.disable();
+      removeShakeRequest();
     }
 
     let isShowHowTo = false;
@@ -124,6 +126,7 @@
       }
       ComicAction.age();
       backgroundMusic.playAge();
+      shakeRequest();
 
       this.tags['comic-popup'].age();
     };
@@ -134,6 +137,7 @@
       }
       ComicAction.sage();
       backgroundMusic.playSage();
+      shakeRequest();
 
       this.tags['comic-popup'].sage();
     };
@@ -142,6 +146,8 @@
       if (scroller.isScrolling() || !isEnabled) {
         return;
       }
+      shakeRequest();
+
       ComicAction.next();
     };
 
@@ -215,10 +221,26 @@
 
     window.addEventListener('resize', resize, false);
 
-    const self = this;
     function resize() {
       scroller.setWidth(window.innerWidth);
       self['comic-page-list'].style.width = `${self.pages.length * window.innerWidth}px`;
+    }
+
+    let shakeRequestTimer = null;
+    const self = this;
+    function shakeRequest() {
+      clearTimeout(shakeRequestTimer);
+      shakeRequestTimer = setTimeout(shakeRequestCallback, 10 * 1000);
+    }
+    function removeShakeRequest() {
+      clearTimeout(shakeRequestTimer);
+    }
+    function shakeRequestCallback() {
+      self['shake-symbol'].classList.add('move');
+      setTimeout(function() {
+        self['shake-symbol'].classList.remove('move');
+      }, 3000);
+      shakeRequest();
     }
   </script>
 
@@ -383,13 +405,34 @@
       pointer-events: none;
       position: absolute;
       z-index: 3;
-      bottom: 0;
+      bottom: -2vw;
       left: 0;
       right: 6vw;
       margin: 0 auto;
       width: 28.28vw;
-      height: 23.44vw;
-      background: url(assets/images/comic-hand-symbol.png) 50% 50% / contain no-repeat;
+      height: 32.34vw;
+      background: url(assets/images/comic-hand-symbol-01.png) 50% 50% / contain no-repeat;
+    }
+    .shake-symbol.move {
+      animation: shake 500ms 2 linear;
+    }
+    @keyframes shake {
+      0% {
+        background-image: url(assets/images/comic-hand-symbol-01.png);
+      }
+      20% {
+        background-image: url(assets/images/comic-hand-symbol-02.png);
+      }
+      40% {
+        background-image: url(assets/images/comic-hand-symbol-03.png);
+      }
+      60% {
+        background-image: url(assets/images/comic-hand-symbol-02.png);
+      }
+      80%,
+      100% {
+        background-image: url(assets/images/comic-hand-symbol-01.png);
+      }
     }
   </style>
 </comic-scene>
