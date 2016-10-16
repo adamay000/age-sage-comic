@@ -121,15 +121,30 @@
     }
     .header__link-author {
       position: absolute;
-      top: 0;
-      right: 0;
-      width: 14.22%;
+      top: -14px;
+      right: -34px;
+      width: 29.22%;
       height: 0;
-      padding-top: 26.56%;
+      padding-top: 33.28%;
       background: url(assets/images/home-monkey.png) 100% 0 no-repeat;
       background-size: contain;
       font-size: 0;
       overflow: hidden;
+      transform: rotate(-30deg);
+      transform-origin: 50% 10%;
+      animation: monkey 2.4s infinite ease-in-out;
+    }
+    @keyframes monkey {
+      0% {
+        transform: rotate(-16deg);
+      }
+      50% {
+        transform: rotate(12deg);
+      }
+      99.9%,
+      100% {
+        transform: rotate(-16deg);
+      }
     }
 
     .footer {
@@ -191,6 +206,14 @@
     .footer__share__item.line {
       background-image: url(assets/images/icon-line.png);
       background-size: 24%;
+    }
+    .footer__share__item a {
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      text-indent: 100%;
+      white-space: nowrap;
     }
 
     .contents__wrapper {
