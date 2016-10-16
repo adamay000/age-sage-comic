@@ -1,4 +1,4 @@
-const THRESHOLD = 4.0;
+const THRESHOLD = 2.0;
 
 const NONE = 'NONE';
 const UP = 'UP';
