@@ -21,9 +21,11 @@
     <div class="footer-inner">
       <div class="footer__share-title">SHARE</div>
       <ul class="footer__share">
-        <li class="footer__share__item twitter"></li>
-        <li class="footer__share__item facebook"></li>
-        <li class="footer__share__item line"></li>
+        <li class="footer__share__item twitter"><a href="https://twitter.com/intent/tweet?url=http%3A%2F%2Ffujiimary.com%2Fagesagecomic&text=%E3%81%82%E3%81%92%E3%81%95%E3%81%92%E3%82%B3%E3%83%9F%E3%83%83%E3%82%AF" target="_blank" class="header__share__twitter">Twitterでシェアする</a></li>
+        <li class="footer__share__item facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Ffujiimary.com%2Fagesagecomic" target="_blank"
+                                                    class="header__share__facebook">Facebookでシェアする</a></li>
+        <li class="footer__share__item line"><a href="http://line.me/R/msg/text/?http%3A%2F%2Ffujiimary.com%2Fagesagecomic" target="_blank"
+                                                class="header__share__facebook">LINEでシェアする</a></li>
       </ul>
     </div>
   </div>

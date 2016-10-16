@@ -3,9 +3,9 @@
     <div class="contents__thanks"></div>
     <div class="contents__title">SHARE</div>
     <ul class="contents__share">
-      <li class="contents__share__item twitter">Twitter</li>
-      <li class="contents__share__item facebook">Facebook</li>
-      <li class="contents__share__item line">LINE</li>
+      <li class="contents__share__item twitter"><a href="https://twitter.com/intent/tweet?url=http%3A%2F%2Ffujiimary.com%2Fagesagecomic&text=%E3%81%82%E3%81%92%E3%81%95%E3%81%92%E3%82%B3%E3%83%9F%E3%83%83%E3%82%AF" target="_blank">Twitter</a></li>
+      <li class="contents__share__item facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Ffujiimary.com%2Fagesagecomic" target="_blank">Facebook</a></li>
+      <li class="contents__share__item line"><a href="http://line.me/R/msg/text/?http%3A%2F%2Ffujiimary.com%2Fagesagecomic" target="_blank">LINE</a></li>
     </ul>
     <div class="contents__title">CREDIT</div>
     <author />
@@ -100,14 +100,19 @@
       height: 10.94vw;
       border-radius: 5.47vw;
       margin: 4.69vw auto 0;
-      padding-left: 16vw;
       box-sizing: border-box;
       line-height: 10.94vw;
       text-align: center;
       font-size: 3.75vw;
+    }
+    .contents__share__item a {
+      display: block;
+      padding-left: 16vw;
+      text-decoration: none;
       color: #ffffff;
     }
     .contents__share__item::before {
+      pointer-events: none;
       content: '';
       display: block;
       position: absolute;
@@ -132,6 +137,7 @@
       background-size: 24%;
     }
     .contents__share__item::after {
+      pointer-events: none;
       content: '';
       display: block;
       position: absolute;

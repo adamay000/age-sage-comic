@@ -4,23 +4,26 @@
       <p class="authors__item__role">漫画・デザイン</p>
       <p class="authors__item__name">藤井　マリー</p>
       <ul class="authors__item__link">
-        <li class="authors__item__link__website"><a href="#">Website</a></li>
-        <li class="authors__item__link__twitter"><a href="#">Twitter</a></li>
+        <li class="authors__item__link__website"><a href="http://fujiimary.com" target="_blank">Website</a></li>
+        <li
+          class="authors__item__link__twitter"><a href="https://twitter.com/maryfujii" target="_blank">Twitter
+        </a></li>
       </ul>
     </li>
     <li class="authors__item">
       <p class="authors__item__role">音楽</p>
       <p class="authors__item__name">馬道まさたか</p>
       <ul class="authors__item__link">
-        <li class="authors__item__link__website"><a href="#">Website</a></li>
-        <li class="authors__item__link__twitter"><a href="#">Twitter</a></li>
+        <li class="authors__item__link__website"><a href="http://umamichi.com" target="_blank">Website</a></li>
+        <li class="authors__item__link__twitter"><a href="https://twitter.com/masaumamichi" target="_blank">Twitter</a></li>
       </ul>
     </li>
     <li class="authors__item">
       <p class="authors__item__role">マークアップ・フロントエンド</p>
       <p class="authors__item__name">やまだだいき</p>
       <ul class="authors__item__link">
-        <li class="authors__item__link__website"><a href="#">Website</a></li>
+        <li
+          class="authors__item__link__website"><a href="http://adamay000.github.io/" target="_blank">Website</a></li>
       </ul>
     </li>
   </ul>
