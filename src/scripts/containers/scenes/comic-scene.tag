@@ -13,7 +13,8 @@
   </div>
   <div if="{this.pages.length && this.pages[this.pages.length - 1].nextPages.age != null}" onClick="{this.tryAge}" class="button-age">あげ？</div>
   <div if="{this.pages.length && this.pages[this.pages.length - 1].nextPages.sage != null}" onClick="{this.trySage}" class="button-sage">さげ？</div>
-  <div if="{this.pages.length && this.pages[this.pages.length - 1].nextPages.next != null}" onClick="{this.tryNext}" class="button-next">次へ</div>
+  <div if="{this.pages.length && this.pages[this.pages.length - 1].nextPages.next != null && this.pages[this.pages.length - 1].pageType === 'age'}" onClick="{this.tryNext}" class="button-next">あげエンディングへ</div>
+  <div if="{this.pages.length && this.pages[this.pages.length - 1].nextPages.next != null && this.pages[this.pages.length - 1].pageType === 'sage'}" onClick="{this.tryNext}" class="button-next">さげエンディングへ</div>
   <div if="{this.pages.length && this.pages[this.pages.length - 1].nextPages.end != null}" onClick="{this.tryEnd}"
        class="button-end">おしまい</div>
   <div
@@ -369,7 +370,7 @@
     }
     .button-next,
     .button-end {
-      width: 45.31vw;
+      width: 74vw;
       left: 0;
       right: 0;
       margin: 0 auto;
