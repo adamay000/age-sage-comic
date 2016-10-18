@@ -1,4 +1,7 @@
 <pc>
+  <div class="background"></div>
+  <div class="background-left-bottom"></div>
+  <div class="background-right-bottom"></div>
   <div class="header">
     <h1 class="header__title">あげさげコミック</h1>
     <div class="header__share">
@@ -10,9 +13,11 @@
   </div>
   <div class="wrapper">
     <div class="description">
-      <p class="description__main-text">スマホを上げると、テンションの上がる展開に、<br>下げるとテンションの下がる展開に進むwebコミックです。<br>スマートフォンでお楽しみ下さい。</p>
-      <img src="assets/images/qr-code.png" width="165" height="165" alt="http://fujiimary.com/agesagecomic" class="description__qr-code">
-      <p class="description__url">http://fujiimary.com/agesagecomic</p>
+      <p class="description__main-text">スマホを上げると、テンションの上がる展開に、<br>下げるとテンションの下がる展開に進むwebコミックです。</p>
+      <div class="description__url-area">
+        <img src="assets/images/qr-code.png" width="165" height="165" alt="http://fujiimary.com/agesagecomic" class="description__url-area__qr-code">
+        <p class="description__url-area__url">http://fujiimary.com/agesagecomic</p>
+      </div>
       <ul class="authors">
         <li class="authors__item">
           <p class="authors__item__role">漫画・デザイン</p>
@@ -43,7 +48,7 @@
       </ul>
     </div>
     <div class="thumbnail">
-      <img src="assets/images/pc-thumbnail.png" width="471" height="531" alt="サムネイル" class="thumbnail__image">
+      <img src="assets/images/pc-thumbnail.png" width="300" height="531" alt="サムネイル" class="thumbnail__image">
     </div>
   </div>
   <p class="footer">© agesagecomic All Rights Reserved.</p>
@@ -54,15 +59,52 @@
 
   <style scoped>
     :scope {
+      display: block;
+      width: 100%;
+      height: 100%;
+      font-family: 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'メイリオ', Meiryo, sans-serif;
       color: #363129;
+    }
+    .background {
+      pointer-events: none;
+      position: fixed;
+      z-index: -1;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: url(assets/images/pc-background.jpg) 50% 50% / cover no-repeat;
+    }
+    .background-left-bottom {
+      pointer-events: none;
+      position: fixed;
+      z-index: 2;
+      left: 0;
+      bottom: 0;
+      width: 11.83vw;
+      min-width: 107px;
+      max-width: 213px;
+      height: 0;
+      padding-top: 39.96%;
+      background: url(assets/images/pc-background-left-bottom.png) 0% 100% / contain no-repeat;
+    }
+    .background-right-bottom {
+      pointer-events: none;
+      position: fixed;
+      z-index: 2;
+      right: 0;
+      bottom: 0;
+      width: 24.56vw;
+      min-width: 221px;
+      max-width: 442px;
+      height: 0;
+      padding-top: 82.93%;
+      background: url(assets/images/pc-background-right-bottom.png) 100% 100% / contain no-repeat;
     }
     .header {
       position: relative;
       min-width: 960px;
-      min-height: 79px;
-      background: url(assets/images/pc-header.png) 50% 0 repeat-x;
       padding-top: 22px;
-      box-sizing: border-box;
     }
     .header__title {
       width: 313px;
@@ -133,31 +175,42 @@
     .description {
       width: 50%;
       float: left;
-      margin-top: 10px;
+      background: #ffe464;
+      padding: 32px 40px 28px;
+      box-sizing: border-box;
+      border-radius: 30px;
       text-align: center;
     }
     .description__main-text {
       margin: 0;
-      line-height: 22px;
+      line-height: 26px;
+      text-align: left;
       font-size: 14px;
+      font-weight: bold;
     }
-    .description__qr-code {
+    .description__url-area {
+      margin-top: 24px;
+      background: #fff;
+      padding: 38px 0 28px;
+      text-align: center;
+    }
+    .description__url-area__qr-code {
       width: 150px;
       height: 150px;
-      margin: 58px 0 38px;
     }
-    .description__url {
-      margin: 0;
-      letter-spacing: 1px;
+    .description__url-area__url {
+      margin: 28px 0 0;
+      letter-spacing: 2px;
       font-size: 16px;
+      font-weight: bold;
     }
 
     .authors {
       display: inline-block;
       list-style: none;
       min-width: 400px;
-      margin: 50px auto 0;
-      padding: 22px 38px;
+      margin: 20px auto 0;
+      padding: 0;
       box-sizing: border-box;
       border: 1px solid #ffe464;
       border-radius: 10px;
@@ -214,12 +267,12 @@
     .thumbnail {
       width: 50%;
       float: right;
-      text-align: right;
+      text-align: center;
     }
     .thumbnail__image {}
 
     .footer {
-      margin: 100px auto 50px;
+      margin: 150px auto 30px;
       text-align: center;
       font-size: 12px;
     }
