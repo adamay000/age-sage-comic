@@ -1,5 +1,7 @@
 # あげさげコミック
 
+http://fujiimary.com/agesagecomic
+
 ```
 git clone https://github.com/adamay000/age-sage-comic.git
 
